@@ -1,0 +1,13 @@
+simplethreads/lib: The sthread package.
+
+This directory implements a library for threading. It supports using
+a native (OS-provided) pthreads implementation as well as user-level
+thread package (the later to be implemented by the student).
+
+The public API is described in ../include/sthread.h. sthread.c
+implements this API by dispatching calls to the active implementation,
+which is found in either sthread_pthread.c or sthread_user.c.
+
+The configure script statically determines implementation to use. That
+script must be re-run, and the project re-built, to switch implementations.
+

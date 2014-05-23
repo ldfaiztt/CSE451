@@ -1,0 +1,6 @@
+Rick Cox <rick@cs.washington.edu>
+
+with generous code lifting from
+GNU Pth 1.4: http://www.gnu.org/software/pth/pth.html
+
+Inspired by the minithreads instructional threads package.

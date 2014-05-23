@@ -1,0 +1,71 @@
+2013-04-24              pjh
+* Fixed a race condition bug in sthread_preempt.c that could cause process
+  to terminate with "Alarm clock" message if preemption period set too
+  low.
+* Fixed (I hope) strange SIGALRM signal behavior where signals would stop
+  being delivered after some time because the itimer would not reset properly
+  when the preemption period was set very low. Note that this was only
+  changed for x86_64, not i386.
+* Renamed "clock_tick()" (etc.) to "timer_tick()" (etc.).
+* Added error-checking on signal-related system calls in sthread_preempt.c.
+* (snowden) Code cleanup and removal of PowerPC support.
+* Bumped version to 2.01.
+
+2012-04-16              pjh
+* Added support for x86_64 architecture in stack switching code and related
+  files.
+* Made adjustments to preemption code to work on x86_64 and modern Linux
+  distributions.
+* Updated / removed various automake and autoconf files to work with
+  current versions of these tools. The following page was helpful:
+  http://stackoverflow.com/ questions/3096989/libtool-version-mismatch-error
+* Added numerous clarifying comments and made other various changes.
+* Added subdirectories in cse451git repository for solutions and grading
+  scripts.
+* Bumped version to 2.00.
+
+2009-05-21              gribble
+* fixed small bug in sthread_preempt.c.  Bug was caught by Daniel Suskin and
+  Eli Williams.
+     old:  it.it_interval.tv_usec = period;
+     new:  it.it_interval.tv_usec = period % 1000000;
+* Bumped version to 1.31.
+
+2006-04-17              zahorjan
+* Added sthread_join() interface.
+* Updated some READMEs
+* Bumped version to 1.30.
+
+2004-01-17		rick
+* Hacked around with configure.in and Makefile.am to
+  try and make them portable across versions of
+  autoconf/automake. Failed, and set the required autoconf
+  to 2.57 instead.
+* Removed GNU Pth derived thread contexts; replaced with
+  assembly to switch stacks on i386 and PowerPC.
+* Made use of native pthreads a compile time, instead of
+  run time, option. Some pthreads libraries expect a
+  pthread record at the base of the stack, even if the
+  pthreads have not been initialized. This breaks
+  the user-level threads.
+* Bumped version to 1.10.
+
+2004-01-09		rick
+* Incorporated changes from last 4 quarters. Bumped version
+  to 1.03.
+
+2002-04-23		rick
+* Fixed typo in comments for sthread_prase_impl to get
+  correct arg strings.
+
+2002-04-22		rick
+* Added comments
+* Added support for implicit index.html to sioux
+* Release 1.0
+
+2002-04-18		rick
+* Release of version 0.9
+
+2002-04-16		rick
+* Added automake support
+

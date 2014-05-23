@@ -1,0 +1,13 @@
+To compile the skeleton files, run one of these commands in this directory:
+    make queuetest
+    make hashtest
+    make all
+
+The test files as distributed may not compile or run correctly; it is your
+job to fix the bugs and implement the functions so that they will! The
+provided tests verify only small aspects of the functionality of the data
+structures, so you should be sure to write additional tests yourself.
+
+The provided clint.py script can be used to check your code for style.
+Please make an attempt not to introduce any new style violations; this
+will make your code more readable both to you and to the TAs.

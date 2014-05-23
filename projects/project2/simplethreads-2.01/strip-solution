@@ -1,0 +1,82 @@
+#!/usr/bin/perl -w
+
+###
+# Remove the solutions from the source code.
+# Solutions are defined as everything from <solution> to
+# </solution>. The entire lines containing those tags are discareded.
+###
+
+use strict;
+
+use Getopt::Long;
+use FileHandle;
+
+my $soln_open = qr"<solution>";
+my $soln_close = qr"</solution>";
+
+######################################################################
+# Options
+
+my ($help) = (0);
+
+GetOptions(help => \$help);
+
+if ($help) {
+    print_help();
+    exit(0);
+}
+
+my @files = @ARGV;
+if (!@files) {
+    print_help();
+    exit(1);
+}
+
+# End Options
+######################################################################
+# Script Proper
+
+foreach my $file (@files) {
+    process_file($file);
+}
+
+
+# End Script Proper
+######################################################################
+# Subroutines
+
+sub process_file {
+    my ($filename) = @_;
+    my ($in_soln, $inh, $outh, $line, $linenum);
+    
+    $in_soln = 0;
+    $inh = new FileHandle($filename)
+	or die "Unable to open $filename";
+    $outh = new FileHandle("> $filename.strip")
+	or die "Unable to open $filename.strip for output";
+    
+    $linenum = 0;
+    while (defined($line = <$inh>)) {
+	$linenum++;
+	if ($line =~ m|$soln_open|) {
+	    die "Open solution tag within solution area, " .
+		"$filename:$linenum\n" if ($in_soln);
+	    $in_soln = 1;
+	} elsif ($line =~ m|$soln_close|) {
+	    die "Close solution tag outside solution area, " .
+		"$filename:$linenum\n" if (!$in_soln);
+	    $in_soln = 0;
+	    next; # don't print the close soln line
+	}
+	if (!$in_soln) {
+	    print $outh $line;
+	}
+    }
+}
+
+sub print_help {
+    print <<EOB;
+Usage: strip-solution [--help] [FILES]
+Remove text between $soln_open and $soln_close from given FILES.
+EOB
+}    

@@ -1,0 +1,86 @@
+Simplethreads Instructional Threads Package
+Copyright (c) Rick Cox 2002 All Rights Reserved
+Available under the GNU General Public License.
+See file COPYING.
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Updated January 2012 - April 2012 by Peter Hornyack
+
+This file is intended for TAs more than students; students should see the
+description of the simplethreads project on the CSE 451 webpage for detailed
+information.
+
+The contents of the original README file are below. For UW's CSE 451 in
+sprint 2012, I updated simplethreads to work on 64-bit x86, along with
+various other changes along the way. Unfortunately some of the nice features
+of Rick's original distribution have been lost along the way, like the
+integration of solution files with the code and the ability to run "make
+student-dist" to package up the project. However, future TAs should pay
+attention to the following instructions:
+
+First, if you are reading this file because you downloaded the source code
+from a previous quarter's website, STOP RIGHT NOW and access the source
+code instead via the cse451 git repository (currently located at
+/cse/courses/cse451/cse451git on instructional servers such as attu and
+vole). Check out /cse/courses/cse451/cse451git-README for instructions on
+how to clone the repository. The repository contains much more stuff
+(like solutions and grading scripts!) that will make your life easy.
+
+Now that you're working with the full repository of code, you can make
+adjustments and commit them to the repository as needed. To create a code
+package that can be distributed to students, configure and then "make
+dist". Makefile.am specifies SUBDIRS which will be included in the dist
+package (along with all of the files in this top-level directory, I think),
+so it will skip the "other", "grading", "solutions", etc. directories
+(double-check this .tar.gz that is created before posting the file on the
+class website, of course).
+
+Some other notes:
+  - the version number can be found in configure.ac
+
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+Platforms Supported
+ - i386
+ - PowerPC
+ 
+Tested on:
+ - Linux 2.4.21/RedHat 7.3/i386, P3, P4, and Dual P3
+ - Linux 2.4.21/Debian 3.0/i386, Dual Xeon
+ - Mac OS X 10.3.2, G4 and G5
+ - FreeBSD 4.9/i386, P4
+ - NetBSD 1.6.1/i386, P4 [user threads only]
+ - NetBSD 1.6/i386, P2 [user threads only]
+
+----------------------------------------------------------------------
+For Instructors:
+
+Use "make student-dist" to generate a distribution without the
+solutions.
+
+For part 1, consider having the students write a design and submit
+that before the code.
+
+Because students may need to update their Makefile.ins (for example,
+when adding new source files), they need access to a working version
+of automake. As of 1/17/2004, spinlock and coredump have automake-1.5,
+which is broken enough that we can't easily suport it. So the latest
+automake/autoconf has been installed in
+/cse451/projects/tools/bin. The autoreconf script in that directory
+has also been hacked to force the use of those tools.
+
+----------------------------------------------------------------------
+To build from CVS:
+
+Generating the configure script requires the following packages:
+  autoconf >= 2.57
+  automake >= 1.6
+  libtool >= 1.5
+
+On CSE grad workstatsions, run (the env variables are required):
+
+export AUTOCONF=autoconf-2.57 AUTOHEADER=autoheader-2.57
+export AUTOMAKE=automake-1.7 ACLOCAL=aclocal-1.7
+aclocal-1.7 && autoheader-2.57 && automake-1.7 -a && autoconf-2.57
+
+
